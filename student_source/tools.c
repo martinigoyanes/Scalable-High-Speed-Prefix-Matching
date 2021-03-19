@@ -114,14 +114,6 @@ int buildUp(struct TreeNode** root, int* defaultGateway)
          }
       }
    }
-   /*current = *root;*/
-   /*while(current){*/
-      /*if(current->len == 0 && current->table[0].head != NULL)*/
-      /*{*/
-         /**defaultGateway = current->table[0].head->outInterface;*/
-         /*break;*/
-      /*}*/
-   /*}*/
    return error;   
 }
 
@@ -135,9 +127,9 @@ int lookUp(uint32_t IPAddress, struct TreeNode* root, int* numOfTableAccesses, i
    while(current){
       getNetmask(current->len, netmask);
       mask = IPAddress & *netmask;
+      *numOfTableAccesses = *numOfTableAccesses + 1;
       if((cell = searchHT(current->table, mask)) != NULL)   
       {
-         *numOfTableAccesses = *numOfTableAccesses + 1;
          // If mask found in node.table[hash(mask)]
          if(cell->outInterface != 0)
             bmp = cell->outInterface;

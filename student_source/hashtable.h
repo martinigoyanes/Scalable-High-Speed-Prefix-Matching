@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define SIZE 1024
+#define SIZE 1033 // Prime number so hash() works better
 
 struct Node
 {

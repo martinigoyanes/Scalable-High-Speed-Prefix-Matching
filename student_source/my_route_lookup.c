@@ -17,8 +17,9 @@ int main(int argc, char **argv){
          
    int totalTableAccesses, processedPackets;
    int* numOfTableAccesses = (int *)malloc(sizeof(int));
-   double averageTableAccesses, averagePacketProcessingTime,
-          totalPacketProcessingTime;
+   double averageTableAccesses = 0,
+          averagePacketProcessingTime = 0,
+          totalPacketProcessingTime = 0;
    int* defaultGateway = (int *)malloc(sizeof(int));
    /* Parse input files (routing table and ipaddrs to lookup) */
    if((error = initializeIO(routingTableName, inputFileName)) != OK)
@@ -56,7 +57,7 @@ int main(int argc, char **argv){
 
       totalTableAccesses = totalTableAccesses + *numOfTableAccesses;
       totalPacketProcessingTime = totalPacketProcessingTime + *searchingTime;
-      processedPackets++;
+      processedPackets = processedPackets + 1;
 
    }
    

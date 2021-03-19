@@ -50,8 +50,8 @@
 194.136.32.1;3927
 
 Packets processed= 50
-Average table accesses= 2.00
-Average packet processing time (nsecs)= 90968.06
-Memory (Kbytes) = 4416
-CPU Time (secs)= 1.401382
+Average table accesses= 4.00
+Average packet processing time (nsecs)= 8710.00
+Memory (Kbytes) = 4384
+CPU Time (secs)= 0.033375
 
