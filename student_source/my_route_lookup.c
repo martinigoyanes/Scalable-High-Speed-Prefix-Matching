@@ -65,7 +65,17 @@ int main(int argc, char **argv){
    averagePacketProcessingTime = totalPacketProcessingTime/processedPackets;
    
    printSummary(processedPackets, averageTableAccesses, averagePacketProcessingTime);
+
+   // Free all used memory
    freeIO();   
+   free(IPAddress);
+   free(searchingTime);
+   free(initialTime);
+   free(finalTime);
+   free(numOfTableAccesses);
+   free(defaultGateway);
+   freeTree(&root);
+   /*free(root);*/
 
    return 0;
 }

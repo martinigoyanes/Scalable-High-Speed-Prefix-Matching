@@ -20,3 +20,4 @@ struct Table{
 struct Table* initHT();
 struct Node* searchHT(struct Table *table, uint32_t mask);
 void printHT(struct Table *table);
+void freeHT(struct Table *table);

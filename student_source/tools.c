@@ -11,6 +11,7 @@ int buildUp(struct TreeNode** root, int* defaultGateway)
    int *prefixLength = (int *)malloc(sizeof(int));
    int *outInterface = (int *)malloc(sizeof(int));
    int *netmask = (int *)malloc(sizeof(int));
+   struct Node *aux;
    uint32_t mask = 0;
    int error = OK, index = 0;
    struct TreeNode *current;
@@ -45,7 +46,7 @@ int buildUp(struct TreeNode** root, int* defaultGateway)
             else
             {
                //add the node at the end of table[index].
-               struct Node *aux = current->table[index].head;
+               aux = current->table[index].head;
                while(aux->next)
                {
                   // Updating mask at Node.table[hash(mask)], make it a marker
@@ -97,7 +98,7 @@ int buildUp(struct TreeNode** root, int* defaultGateway)
             else
             {
                //add the node at the end of table[index].
-               struct Node *aux = current->table[index].head;
+               aux = current->table[index].head;
                while(aux->next)
                {
                   aux = aux->next;
@@ -108,12 +109,20 @@ int buildUp(struct TreeNode** root, int* defaultGateway)
                newNode->marker = 0;
                newNode->next = NULL;
                aux->next = newNode;
-            }
 
+            }
             break;
          }
       }
    }
+
+   // Free used memory
+   free(numAccesses);
+   free(prefix);
+   free(prefixLength);
+   free(outInterface);
+   free(netmask);
+
    return error;   
 }
 
@@ -145,12 +154,58 @@ int lookUp(uint32_t IPAddress, struct TreeNode* root, int* numOfTableAccesses, i
       }else
       {
          if(current->len == 1)
+         {
+            // Free used memory
+            free(netmask);
             return *defaultGateway;
+         }
          // MISS -> go left
          current = current->left;
       }
    }
+   // Free used memory
+   free(netmask);
    return bmp;
+}
+
+void freeTree(struct TreeNode** root){
+   struct TreeNode * node = *root;
+   struct TreeNode * up = NULL;
+
+   while (node != NULL) {
+      if (node->left != NULL) {
+         struct TreeNode * left = node->left;
+         node->left = up;
+         up = node;
+         node = left;
+      } else if (node->right != NULL) {
+         struct TreeNode * right = node->right;
+         node->left = up;
+         node->right = NULL;
+         up = node;
+         node = right;
+      } else {
+         if (up == NULL) {
+            freeHT(node->table);
+            free(node->table);
+            free(node);
+            node = NULL;
+         }
+         while (up != NULL) {
+            freeHT(node->table);
+            free(node->table);
+            free(node);
+            if (up->right != NULL) {
+               node = up->right;
+               up->right = NULL;
+               break;
+            } else {
+               node = up;
+               up = up->left;
+            }
+         }
+      }
+   }
 }
 
 struct TreeNode* createTree(){
@@ -232,11 +287,11 @@ struct TreeNode* createTree(){
    node_28->left = node_26;
    node_28->right = node_30;
 
-   node_24->left = node_20;
+   node_16->left = node_8;
+   node_16->right = node_20;
+
+   node_24->left = node_16;
    node_24->right = node_28;
 
-   node_16->left = node_8;
-   node_16->right = node_24;
-
-   return node_16;
+   return node_24;
 }

@@ -3,10 +3,24 @@
 
 struct Table* initHT()
 {
-    struct Table *table = (struct Table *)malloc(sizeof(struct Table) * SIZE);
-    for(int i = 0; i < SIZE; i++)
-        table[i].head = NULL;
-    return table;
+   struct Table *table = (struct Table *)malloc(sizeof(struct Table) * SIZE);
+
+   for(int i = 0; i < SIZE; i++)
+      table[i].head = NULL;
+
+   return table;
+}
+
+void freeHT(struct Table *table){
+   for(int i = 0; i < SIZE; i++){
+      struct Node *curr;
+      while(table[i].head){
+          curr = table[i].head;
+          table[i].head = table[i].head->next;
+          free(curr);
+      }
+      table[i].head = NULL;
+   }
 }
 
 
