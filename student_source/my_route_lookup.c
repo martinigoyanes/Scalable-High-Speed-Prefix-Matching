@@ -61,7 +61,7 @@ int main(int argc, char **argv){
 
    }
    
-   averageTableAccesses = totalTableAccesses/processedPackets;
+   averageTableAccesses = (double)totalTableAccesses/(double)processedPackets;
    averagePacketProcessingTime = totalPacketProcessingTime/processedPackets;
    
    printSummary(processedPackets, averageTableAccesses, averagePacketProcessingTime);
