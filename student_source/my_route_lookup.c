@@ -1,5 +1,5 @@
 #include "io.h"
-#include "tools.h"
+#include "algorithm.h"
 #include <time.h>
 
 int main(int argc, char **argv){

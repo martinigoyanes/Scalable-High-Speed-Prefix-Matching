@@ -1,6 +1,5 @@
-SRC = my_route_lookup.c io.c io.h utils.c utils.h	hashtable.c	hashtable.h	binarytree.c	binarytree.h	tools.c	tools.h
+SRC = my_route_lookup.c io.c io.h utils.c utils.h	hashtable.c	hashtable.h	binarytree.c	binarytree.h	algorithm.c	algorithm.h
 CFLAGS = -Wall -O3
-#CFLAGS = -Wall	-ggdb
 
 all: my_route_lookup
 

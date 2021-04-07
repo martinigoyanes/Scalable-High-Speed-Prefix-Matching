@@ -9,17 +9,3 @@ struct TreeNode* createNode(int len) {
 
    return newNode;
 }
-
-void print_preorder(struct TreeNode * root)
-{
-    if (root)
-    {
-        printf("%d\n",root->len);
-        print_preorder(root->left);
-        print_preorder(root->right);
-    }
-
-}
-
-
-
